@@ -9,7 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, Raleway,sans-serif;
 }
 
 label {
@@ -78,7 +78,7 @@ a:hover {
 }
 
 .heading-1 {
-  font-family: Raleway;
+  font-family: 'Raleway';
   font-size: 60px;
   font-weight: bold;
   font-style: normal;
@@ -89,7 +89,7 @@ a:hover {
 }
 
 .sub-heading-2 {
-  font-family: Raleway;
+  font-family: 'Raleway';
   font-size: 28px;
   font-weight: bold;
   font-style: normal;
@@ -99,32 +99,32 @@ a:hover {
   color: #1675b5;
 }
 
-.input-group {
-  .input-group-prepend {
-    background-color: #2283c4;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
-  }
+// .input-group {
+//   .input-group-prepend {
+//     background-color: #2283c4;
+//     border-top-left-radius: 12px;
+//     border-bottom-left-radius: 12px;
+//   }
 
-  .input-group-prepend-right {
-    background-color: #2283c4;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-  }
+//   .input-group-prepend-right {
+//     background-color: #2283c4;
+//     border-top-right-radius: 12px;
+//     border-bottom-right-radius: 12px;
+//   }
 
-  .custom-file {
-    padding-top: 15px;
-    padding-left: 20px;
-  }
-}
+//   .custom-file {
+//     padding-top: 15px;
+//     padding-left: 20px;
+//   }
+// }
 
-.input-group .input-group-text {
-  color: white;
-  padding-left: 21px;
-  font-family: Raleway;
-}
+// .input-group .input-group-text {
+//   color: white;
+//   padding-left: 21px;
+//   font-family: 'Raleway';
+// }
 
-.input-group {
-  margin: 1.5%;
-}
+// .input-group {
+//   margin: 1.5%;
+// }
 
