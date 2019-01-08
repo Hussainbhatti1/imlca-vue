@@ -1,37 +1,36 @@
 <template>
   <div class="app-container">
     <h1 align="center" class="sub-heading-2">Edit Profile</h1>
-    <el-row class="user-menu">
-      <el-col :span="20" :offset="2">
-        <el-form ref="form" :model="form" label-width="120px">
-          <div class="input-group input-group-text">
-            <el-form-item label="First Name" class="input-group-prepend input-group-prepend-right">
+    <el-row>
+      <el-col :span="12" :offset="5">
+        <el-form ref="form" :model="form" label-width="150px">
+          <div>
+            <el-form-item label="First Name">
               <el-input v-model="form.first_name"></el-input>
             </el-form-item>
           </div> 
-          <div class="input-group input-group-text"> 
-            <el-form-item label="Last Name" class="input-group-prepend input-group-prepend-right">
+          <div> 
+            <el-form-item label="Last Name">
               <el-input v-model="form.last_name"></el-input>
             </el-form-item>
           </div> 
-          <div class="input-group input-group-text">  
-            <el-form-item label="Email" class="input-group-prepend input-group-prepend-right">
+          <div>  
+            <el-form-item label="Email">
               <el-input v-model="form.email"></el-input>
             </el-form-item>
           </div>  
-          <div class="input-group input-group-text"> 
-            <el-form-item label="Password" class="input-group-prepend input-group-prepend-right">
+          <div>
+            <el-form-item label="Password">
               <el-input type="password" v-model="form.password" ></el-input>
             </el-form-item>
           </div> 
-          <div class="input-group input-group-text">  
-            <el-form-item label="Confirm Password" class="input-group-prepend input-group-prepend-right" label-width="150px">
+          <div>  
+            <el-form-item label="Confirm Password">
               <el-input type="password" v-model="form.password_confirm"></el-input>
             </el-form-item>
           </div>
-
-          <div class="input-group input-group-text"> 
-            <el-form-item label="Gender" class="input-group-prepend input-group-prepend-right">
+          <div> 
+            <el-form-item label="Gender">
               <el-select v-model="form.gender" placeholder="select gender">
                 <el-option label="M" value="male"/>
                 <el-option label="F" value="female"/>
@@ -39,8 +38,8 @@
             </el-form-item> 
           </div> 
 
-          <div class="input-group input-group-text">  
-            <el-form-item label="School" class="input-group-prepend input-group-prepend-right"> 
+          <div>  
+            <el-form-item label="School"> 
               <el-select v-model="form.school" placeholder="select school">
                 <el-option label="Darain" value="darain"/>
                 <el-option label="Yorktown" value="yorktown"/>
@@ -48,8 +47,8 @@
               </el-select>
             </el-form-item>
           </div>  
-          <div class="input-group input-group-text"> 
-            <el-form-item label="Current Password" class="input-group-prepend input-group-prepend-right" label-width="150px">
+          <div> 
+            <el-form-item label="Password">
               <el-input type="password" v-model="form.password_current"></el-input>
             </el-form-item>
           </div>  
@@ -62,7 +61,6 @@
     </el-row>
   </div>
 </template>
-
 <script>
   export default {
     data() {
@@ -99,26 +97,9 @@
     margin-right:auto;
     width:50%;
 }
-.line{
-  text-align: center;
-}
-
-.custom-select select {
-    display: inline-block;
-    padding: 4px 3px 3px 5px;
-    margin: 0;
-    font: inherit;
-    outline:none; /* remove focus ring from Webkit */
-    line-height: 1.2;
-    background: #000;
-    color:white;
-    border:0;
-}
-
 
 .input-group-text {
   color: white;
-  padding-left: 30px;
   font-family: Raleway;
 }
 </style>

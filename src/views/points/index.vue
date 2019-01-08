@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row class="user-menu">
-      <el-col :span="20">
+      <el-col :span="24">
         <el-table
           v-loading="listLoading"
           :data="list"
@@ -12,22 +12,22 @@
           highlight-current-row>
           <el-table-column label="Team">
             <template slot-scope="scope">
-              <span class="sub-heading-2">{{ scope.row.title }}</span>
+              <span>{{ scope.row.title }}</span>
             </template>
           </el-table-column>
           <el-table-column label="W" width="110" align="center">
             <template slot-scope="scope">
-              <span class="sub-heading-2">{{ scope.row.updated_at }}</span>
+              <span>{{ scope.row.updated_at }}</span>
             </template>
           </el-table-column>
           <el-table-column label="L" width="110" align="center">
             <template slot-scope="scope">
-              <span class="sub-heading-2">{{ scope.row.created_at }}</span>
+              <span>{{ scope.row.created_at }}</span>
             </template>
           </el-table-column>
           <el-table-column label="Pts" width="110" align="center">
             <template slot-scope="scope">
-              <span class="sub-heading-2">{{ scope.row.created_at }}</span>
+              <span>{{ scope.row.created_at }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -60,13 +60,14 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>
 .user-menu {
     margin-left:auto;
     margin-right:auto;
-    width:65%;
+    width:100%;
 }
 .line{
   text-align: center;

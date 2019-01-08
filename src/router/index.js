@@ -39,6 +39,32 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/form',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/form/index'),
+        meta: { title: 'Form', icon: 'form' }
+      }
+    ]
+  },
+
+  {
+    path: '/table',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Table', icon: 'table' }
+      }
+    ]
+  },
+
+  {
     path: '/points',
     component: Layout,
     children: [
@@ -52,6 +78,19 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/schedules',
+    component: Layout,
+    children: [
+      {
+        path: 'schedules',
+        name: 'schedules',
+        component: () => import('@/views/schedules/index'),
+        meta: { title: 'Manage Schedules', icon: 'excel' }
+      }
+    ]
+  },
+
+  {
     path: '/profile',
     component: Layout,
     children: [
@@ -59,7 +98,20 @@ export const constantRouterMap = [
         path: 'profile',
         name: 'profile',
         component: () => import('@/views/profile/index'),
-        meta: { title: 'Profile', icon: 'form' }
+        meta: { title: 'Profile', icon: 'user' }
+      }
+    ]
+  },
+
+  {
+    path: '/invite',
+    component: Layout,
+    children: [
+      {
+        path: 'invite',
+        name: 'invite',
+        component: () => import('@/views/invite/index'),
+        meta: { title: 'Invite Athlete', icon: 'invitation' }
       }
     ]
   },
