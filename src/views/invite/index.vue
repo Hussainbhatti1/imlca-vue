@@ -23,18 +23,20 @@
             <el-form-item label="Email">
               <el-input v-model="form.email"></el-input>
             </el-form-item>
-          </div>  
+          </div>
           <div> 
             <el-form-item label="State">
-              <el-select v-model="form.state" placeholder="select state">
+              <el-select v-model="form.state" class="w-100" placeholder="select state">
                 <el-option label="NY" value="New York"/>
                 <el-option label="CA" value="Los Angeles"/>
               </el-select>
             </el-form-item> 
-          </div> 
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit">Submit</el-button>
-          </el-form-item>
+          </div>
+          <div class="text-center">  
+            <el-form-item>
+              <el-button type="primary" @click="onSubmit" round>Submit</el-button>
+            </el-form-item>
+          </div>  
         </el-form>
       </el-col>
     </el-row>

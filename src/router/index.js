@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+Vue.use(Router);
+
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
-Vue.use(Router)
 
 /* Layout */
 import Layout from '../views/layout/Layout'
@@ -39,27 +40,54 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/form',
+    path: '/profile',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        path: 'profile',
+        name: 'profile',
+        component: () => import('@/views/profile/index'),
+        meta: { title: 'Profile', icon: 'user' }
       }
     ]
   },
 
   {
-    path: '/table',
+    path: '/games/:id/show',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'games',
+        name: 'games',
+        component: () => import('@/views/games/show'),
+        meta: { private: false }
+      }
+    ]
+  },
+
+  {
+    path: '/games/:id/edit',
+    component: Layout,
+    children: [
+      {
+        path: 'games',
+        name: 'edit_game',
+        component: () => import('@/views/games/edit'),
+        meta: { private: false }
+      }
+    ]
+  },
+
+
+  {
+    path: '/games/:game_id/team_games/:id/edit',
+    component: Layout,
+    children: [
+      {
+        path: 'team_games',
+        name: 'team_games',
+        component: () => import('@/views/team_games/edit'),
+        meta: { private: false }
       }
     ]
   },
@@ -91,14 +119,27 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/profile',
+    path: '/teams',
     component: Layout,
     children: [
       {
-        path: 'profile',
-        name: 'profile',
-        component: () => import('@/views/profile/index'),
-        meta: { title: 'Profile', icon: 'user' }
+        path: 'teams',
+        name: 'teams',
+        component: () => import('@/views/teams/new'),
+        meta: { title: 'Add Team', icon: 'peoples' }
+      }
+    ]
+  },
+
+  {
+    path: '/games',
+    component: Layout,
+    children: [
+      {
+        path: 'games',
+        name: 'games',
+        component: () => import('@/views/games/new'),
+        meta: { title: 'Add Game', icon: 'example' }
       }
     ]
   },
@@ -129,6 +170,45 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/athletes/:id/edit',
+    component: Layout,
+    children: [
+      {
+        path: 'athletes',
+        name: 'edit_profile',
+        component: () => import('@/views/athletes/edit'),
+        meta: { title: 'Edit Profile', icon: 'user' }
+      }
+    ]
+  },
+
+  {
+    path: '/athletes/:id/show',
+    component: Layout,
+    children: [
+      {
+        path: 'athletes',
+        name: 'show_profile',
+        component: () => import('@/views/athletes/show'),
+        meta: { title: 'View Profile', icon: 'user' }
+      }
+    ]
+  },
+
+  {
+    path: '/athletes/colleges',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'index',
+        component: () => import('@/views/athletes/colleges/index'),
+        meta: { title: 'Join College', icon: 'table' }
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
 ]
 
@@ -137,3 +217,4 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
+

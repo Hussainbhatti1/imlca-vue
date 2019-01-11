@@ -1,7 +1,6 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
     <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
-    <breadcrumb />
     <el-link class="avatar-container" trigger="click">
       <span style="display:block; cursor: pointer; color:white;" @click="logout">LogOut</span>
     </el-link>

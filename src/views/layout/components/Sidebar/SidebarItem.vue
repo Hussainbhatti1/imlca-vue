@@ -99,3 +99,8 @@ export default {
   }
 }
 </script>
+<style rel="stylesheet/scss" lang="scss" scoped>
+  .el-menu-item {
+    font-family: Raleway;
+  }
+</style>

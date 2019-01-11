@@ -2,7 +2,7 @@
   <div class="app-container">
     <h1 align="center" class="sub-heading-2">Edit Profile</h1>
     <el-row>
-      <el-col :span="12" :offset="5">
+      <el-col :sm="12" :offset="5">
         <el-form ref="form" :model="form" label-width="150px">
           <div>
             <el-form-item label="First Name">
@@ -31,7 +31,7 @@
           </div>
           <div> 
             <el-form-item label="Gender">
-              <el-select v-model="form.gender" placeholder="select gender">
+              <el-select v-model="form.gender" class="w-100" placeholder="select gender">
                 <el-option label="M" value="male"/>
                 <el-option label="F" value="female"/>
               </el-select>
@@ -40,7 +40,7 @@
 
           <div>  
             <el-form-item label="School"> 
-              <el-select v-model="form.school" placeholder="select school">
+              <el-select v-model="form.school" class="w-100" placeholder="select school">
                 <el-option label="Darain" value="darain"/>
                 <el-option label="Yorktown" value="yorktown"/>
                 <el-option label="Westhill" value="westhill"/>
@@ -51,11 +51,13 @@
             <el-form-item label="Password">
               <el-input type="password" v-model="form.password_current"></el-input>
             </el-form-item>
+          </div> 
+          <div class="text-center"> 
+            <el-form-item>
+              <el-button type="primary" @click="onSubmit" round>Create</el-button>
+              <el-button type="danger" @click="onCancel" round>Cancel</el-button>
+            </el-form-item>
           </div>  
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit">Create</el-button>
-            <el-button @click="onCancel">Cancel</el-button>
-          </el-form-item>
         </el-form>
       </el-col>
     </el-row>

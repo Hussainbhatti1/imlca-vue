@@ -57,6 +57,7 @@
     },
     methods: {
       onSubmit() {
+        debugger
         console.log('submit!');
       }
     }

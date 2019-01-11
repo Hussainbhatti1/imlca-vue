@@ -1,5 +1,5 @@
 <template>
-<el-menu :default-active="activeIndex" text-color="white" class="footer" mode="horizontal" @select="handleSelect">
+<el-menu text-color="white" class="footer" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">PLAYER POINTS</el-menu-item>
   <el-menu-item index="2">TEAM SCHEDULE</el-menu-item>
   <el-menu-item index="3">TEAM RANKINGS</el-menu-item>
@@ -28,9 +28,14 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+
+.el-menu-item:hover {
+    background-color: #1675b5 !important;
+}
 .footer {
   background-color: #1675b5;
-  line-height: 50px;
+  decoration: none;
+  line-height: 40px;
   border-radius: 0px !important;
   .footer-container {
     line-height: 58px;
@@ -40,11 +45,9 @@ export default {
   }
 
   .copyright {
-    width: 415px;
     font-family: Raleway;
     font-size: 15px;
     letter-spacing: 0px;
-    color: #ffffff;
     float:right;
   }
   .screenfull {
@@ -52,6 +55,10 @@ export default {
     right: 90px;
     color: red;
   }
+  .el-menu-item{
+    font-family: Raleway;
+  }
+
   .menu-container {
     display: inline-block;
     position: absolute;
