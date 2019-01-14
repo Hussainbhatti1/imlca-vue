@@ -51,7 +51,20 @@
             <el-form-item label="Password">
               <el-input type="password" v-model="form.password_current"></el-input>
             </el-form-item>
-          </div> 
+          </div>
+          <div>
+            <el-form-item label="Image">
+              <el-upload
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :before-remove="beforeRemove"
+                :on-exceed="handleExceed"
+                :file-list="fileList">
+                <el-button size="small" class="upload-image" type="primary">Click to upload</el-button>
+              </el-upload>
+            </el-form-item>
+          </div>
           <div class="text-center"> 
             <el-form-item>
               <el-button type="primary" @click="onSubmit" round>Create</el-button>
@@ -67,6 +80,8 @@
   export default {
     data() {
     return {
+      fileList:  '',
+
       form: {
         first_name: '',
         last_name: '',
@@ -83,6 +98,18 @@
       onSubmit() {
         this.$message('submit!')
       },
+     handleRemove(file, fileList) {
+            console.log(file, fileList);
+          },
+          handlePreview(file) {
+            console.log(file);
+          },
+          handleExceed(files, fileList) {
+            this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
+          },
+          beforeRemove(file, fileList) {
+            return this.$confirm(`Confirm removal ${ file.name } ？`);
+          },
       onCancel() {
         this.$message({
           message: 'cancel!',
@@ -103,6 +130,16 @@
 .input-group-text {
   color: white;
   font-family: Raleway;
+}
+
+.upload-image {
+    background: #2283c4;
+    border-radius: 12px;
+    color: white;
+    height: 47px;
+    width: 100%;
+    position: absolute;
+    margin-top: -30px;
 }
 </style>
 
