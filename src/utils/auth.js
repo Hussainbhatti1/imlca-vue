@@ -14,6 +14,10 @@ export function removeToken() {
   return Cookies.remove(TokenKey)
 }
 
-export function isAdmin() {
+export function isCoach() {
+  return true;
+}
+
+export function isAthlete() {
   return true;
 }

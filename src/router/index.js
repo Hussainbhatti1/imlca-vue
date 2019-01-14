@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import { isCoach, isAthlete } from '@/utils/auth'
 Vue.use(Router);
 
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
@@ -22,23 +22,8 @@ import Layout from '../views/layout/Layout'
     icon: 'svg-name'             the icon show in the sidebar,
   }
 **/
-export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { path: '/register', component: () => import('@/views/register/index'), hidden: true },
-  { path: '/404', component: () => import('@/views/404'), hidden: true },
 
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    name: 'Dashboard',
-    hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
-  },
-
+export var coachRouteMap = [
   {
     path: '/profile',
     component: Layout,
@@ -169,7 +154,9 @@ export const constantRouterMap = [
       }
     ]
   },
+]
 
+export var athleteRouteMap = [
   {
     path: '/athletes/:id/edit',
     component: Layout,
@@ -208,9 +195,35 @@ export const constantRouterMap = [
       }
     ]
   },
+]
+
+export var constantRouterMap = [
+  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+  { path: '/register', component: () => import('@/views/register/index'), hidden: true },
+  { path: '/404', component: () => import('@/views/404'), hidden: true },
+
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    name: 'Dashboard',
+    hidden: true,
+    children: [{
+      path: 'dashboard',
+      component: () => import('@/views/dashboard/index')
+    }]
+  },
 
   { path: '*', redirect: '/404', hidden: true }
 ]
+
+//  if (isAthlete()) {
+//   constantRouterMap = constantRouterMap.concat(athleteRouteMap)
+// } // Uncomment this to see athlete side page
+
+ if (isCoach()) {
+  constantRouterMap = constantRouterMap.concat(coachRouteMap)
+}
 
 export default new Router({
   // mode: 'history', //后端支持可开
