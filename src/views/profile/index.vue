@@ -61,7 +61,7 @@
                 :before-remove="beforeRemove"
                 :on-exceed="handleExceed"
                 :file-list="fileList">
-                <el-button size="small" class="upload-image" type="primary">Click to upload</el-button>
+                <el-button size="small" type="primary">Click to upload</el-button>
               </el-upload>
             </el-form-item>
           </div>
@@ -132,14 +132,6 @@
   font-family: Raleway;
 }
 
-.upload-image {
-    background: #2283c4;
-    border-radius: 12px;
-    color: white;
-    height: 47px;
-    width: 100%;
-    position: absolute;
-    margin-top: -30px;
-}
+
 </style>
 

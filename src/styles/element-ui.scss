@@ -9,37 +9,6 @@
   display: none;
 }
 
-.el-form-item__label {
-  color: #1675b5;
-}
-
-.el-input {
-  input[type="text"]{
-    background: #2283c4;
-    border-radius: 12px;
-    color: white;
-    height: 50px;
-  }
-}
-
-.el-input {
-  input[type="password"]{
-    background: #2283c4;
-    border-radius: 12px;
-    color: white;
-    height: 50px;
-  }
-}
-
-.el-input {
-  input[type="number"]{
-    background: #2283c4;
-    border-radius: 12px;
-    color: white;
-    height: 50px;
-  }
-}
-
 //暂时性解决diolag 问题 https://github.com/ElemeFE/element/issues/2461
 .el-dialog {
   transform: none;

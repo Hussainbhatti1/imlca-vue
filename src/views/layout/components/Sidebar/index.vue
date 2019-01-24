@@ -5,7 +5,7 @@
       :default-active="$route.path"
       :collapse="isCollapse"
       mode="vertical"
-      background-color="#3498db"
+      background-color="rgb(48, 65, 86)"
       text-color="#fff"
       active-text-color="#ffff"
     >

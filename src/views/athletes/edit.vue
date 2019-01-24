@@ -125,13 +125,13 @@
                 :before-remove="beforeRemove"
                 :on-exceed="handleExceed"
                 :file-list="fileList">
-                <el-button size="small" class="upload-image" type="primary">Click to upload</el-button>
+                <el-button size="small" type="primary">Click to upload</el-button>
               </el-upload>
             </el-form-item>
           </div>
           <div class="text-center">
             <el-form-item>
-              <el-button type="primary" @click="onSubmit" round>Update</el-button>
+              <el-button type="info" @click="onSubmit" round>Update</el-button>
               <el-button type="danger" @click="onCancel" round>Cancel my account</el-button>
             </el-form-item>
           </div>

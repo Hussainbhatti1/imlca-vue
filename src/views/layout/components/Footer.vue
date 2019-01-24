@@ -33,7 +33,7 @@ export default {
     background-color: #1675b5 !important;
 }
 .footer {
-  background-color: #1675b5;
+  background-color: black;
   decoration: none;
   line-height: 40px;
   border-radius: 0px !important;

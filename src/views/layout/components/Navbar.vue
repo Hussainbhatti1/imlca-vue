@@ -37,7 +37,7 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .navbar {
-  background-color: #1675b5;
+  background-color: black;
   height: 50px;
   line-height: 50px;
   border-radius: 0px !important;
