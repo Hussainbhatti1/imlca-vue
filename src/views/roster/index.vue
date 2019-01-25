@@ -45,7 +45,7 @@
 </template>
 
 <script>
-  import { getList } from '@/api/university'
+  import { getList } from '@/api/college'
 
 export default {
     data() {

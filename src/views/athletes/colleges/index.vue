@@ -14,8 +14,8 @@
 
       <el-table-column align="center" label="Actions">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.edit" type="danger" size="small" icon="el-icon-circle-check-outline" @click="confirmEdit(scope.row)">Unfollow</el-button>
-          <el-button v-else type="primary" size="small" icon="el-icon-edit" @click="scope.row.edit=!scope.row.edit">Follow</el-button>
+          <el-button v-if="scope.row.athlete_college_id" type="danger" size="small" icon="el-icon-circle-check-outline" @click="cancelEdit(scope.row)">Unfollow</el-button>
+          <el-button v-else type="primary" size="small" icon="el-icon-edit" @click="followCollege(scope.row)">Follow</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import { getList } from '@/api/university'
+  import { getList, collegeFollow, collegeUnfollow } from '@/api/college'
 
 export default {
   filters: {
@@ -49,27 +49,35 @@ export default {
     fetchData() {
       this.listLoading = true
       getList(this.listQuery).then(response => {
-        debugger
         this.list = response
         this.listLoading = false
       })
     },
     cancelEdit(row) {
-      row.title = row.originalTitle
-      row.edit = false
-      this.$message({
-        message: 'The title has been restored to the original value',
-        type: 'warning'
-      })
+      if (row.athlete_college_id != null){
+        collegeUnfollow(row.id, row.athlete_college_id).then(response => {
+            row.athlete_college_id = null
+            this.listLoading = false
+          })
+        this.$message({
+          message: 'The college has been Un-followed',
+          type: 'warning'
+        })
+      }
     },
-    confirmEdit(row) {
-      row.edit = false
-      row.originalTitle = row.title
-      this.$message({
-        message: 'The college has been followed',
-        type: 'success'
-      })
-    }
+
+    followCollege(row) {
+      if (row.athlete_college_id == null){
+        collegeFollow(row.id).then(response => {
+            row.athlete_college_id = response.athlete_college_id
+            this.listLoading = false
+          })
+        this.$message({
+          message: 'The college has been followed',
+          type: 'success'
+        })
+      }
+    },
   }
 }
 </script>

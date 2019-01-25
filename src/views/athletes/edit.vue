@@ -42,6 +42,7 @@
                 <el-option label="Defence" value="defence"/>
                 <el-option label="Face_off" value="face_off"/>
                 <el-option label="Goalie" value="goalie"/>
+                <el-option label="LSM" value="lsm"/>
               </el-select>
             </el-form-item> 
           </div>
@@ -55,17 +56,17 @@
           </div>
           <div>
             <el-form-item label="Height (ft)">
-              <el-input type="number" v-model="form.height_ft" ></el-input>
+              <el-input type="number" v-model="form.height_in_feet" ></el-input>
             </el-form-item>
           </div>
           <div>
             <el-form-item label="Height (in)">
-              <el-input type="number" v-model="form.height_in" ></el-input>
+              <el-input type="number" v-model="form.height_in_inches" ></el-input>
             </el-form-item>
           </div>
           <div>
             <el-form-item label="Weight (lbs)">
-              <el-input type="number" v-model="form.weight_lbs" ></el-input>
+              <el-input type="number" v-model="form.weight" ></el-input>
             </el-form-item>
           </div>
           <div>
@@ -84,25 +85,30 @@
           <div>
             <el-form-item label="Gender">
               <el-select v-model="form.gender" class="w-100" placeholder="select gender">
-                <el-option label="M" value="male"/>
-                <el-option label="F" value="female"/>
+                <el-option label="Male" value="male"/>
+                <el-option label="Female" value="female"/>
               </el-select>
             </el-form-item>
           </div>
           <div>
             <el-form-item label="School"> 
-              <el-select v-model="form.school" class="w-100" placeholder="select school">
-                <el-option label="Darain" value="darain"/>
-                <el-option label="Yorktown" value="yorktown"/>
-                <el-option label="Westhill" value="westhill"/>
+               <el-select v-model="form.school" class="w-100" placeholder="select school">
+                  <el-option
+                    v-for="school in form.schools"
+                    :label="school[0]"
+                   :value="school[1]">
+                  </el-option>
               </el-select>
             </el-form-item>
           </div>
           <div>
             <el-form-item label="State">
               <el-select v-model="form.state" class="w-100" placeholder="select state">
-                <el-option label="NY" value="new york"/>
-                <el-option label="CA" value="log angeles"/>
+                <el-option
+                  v-for="state in form.states"
+                  :label="state[0]"
+                 :value="state[1]">
+                </el-option>
               </el-select>
             </el-form-item>
           </div>
@@ -131,8 +137,7 @@
           </div>
           <div class="text-center">
             <el-form-item>
-              <el-button type="info" @click="onSubmit" round>Update</el-button>
-              <el-button type="danger" @click="onCancel" round>Cancel my account</el-button>
+              <el-button type="primary" @click="onSubmit" round>Update</el-button>
             </el-form-item>
           </div>
         </el-form>
@@ -141,6 +146,8 @@
   </div>
 </template>
 <script>
+  import { editUser, getUser } from '@/api/profile'
+
   export default {
     data() {
     return {
@@ -153,18 +160,24 @@
         password_confirm: false,
         password_current: '',
         gender: '',
+        schools:'',
         school:'',
+        state:'',
+        states:''
         position: '',
         city: '',
         dominant_hand: '',
-        height_ft: '',
-        height_in: '',
-        weight_lbs: '',
+        height_in_feet: '',
+        height_in_inches: '',
+        weight: '',
         graduation_year: '',
         phone_number: '',
         link: '',
       }
     }
+    },
+    created() {
+      this.fetchData()
     },
     methods: {
 
@@ -181,7 +194,32 @@
         return this.$confirm(`Confirm removal ${ file.name } ？`);
       },
       onSubmit() {
+        editUser(this.form)
         this.$message('submit!')
+      },
+      fetchData() {
+        debugger
+        getUser().then(response => {
+          debugger
+          this.form.first_name = response.first_name
+          this.form.last_name = response.last_name
+          this.form.password = response.password
+          this.form.city = response.city
+          this.form.gender = response.gender
+          this.form.graduation_year = response.graduation_year
+          this.form.email = response.email
+          this.form.state = response.state
+          this.form.schools = response.schools
+          this.form.school = response.school
+          this.form.states = response.states
+          this.form.state = response.state
+          this.form.height_in_feet = response.height_in_feet
+          this.form.height_in_inches = response.height_in_inches
+          this.form.weight = response.weight
+          this.form.position = response.position
+          this.form.link = response.link
+          this.form.phone_number = response.phone_number
+        })
       },
       onCancel() {
         this.$message({
@@ -189,7 +227,7 @@
           type: 'warning'
         })
       }
-    }
+    },
   }
 </script>
 

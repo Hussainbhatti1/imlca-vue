@@ -5,25 +5,25 @@
         <el-col :sm="12">
           <div class="text-center">
           </div>
-          <p class="heading-1 text-center mt-3">Athlete 30</p>
+          <p class="heading-1 text-center mt-3">{{ this.user.first_name }} {{ this.user.last_name }}</p>
           <div class="text-center sub-heading-1">
-            <p>Class of: 2020</p>
-            <p>Darian</p>
-            <p>NY</p>
+            <p>Class of: {{ this.user.graduation_year }}</p>
+            <p>{{ this.user.school }}</p>
+            <p>{{ this.user.state }}</p>
           </div><br>
 
           <p class="heading-1 text-center">Player Facts</p>
           <div class="text-center sub-heading-1">
-            <p>Height: 6.2</p>
-            <p>Weight: 70</p>
-            <p>Position: attack</p>
-            <p>Dominant Hand: left</p>
+            <p>Height: {{ this.user.height_in_feet }}.{{ this.user.height_in_inches }}</p>
+            <p>Weight: {{ this.user.weight }}</p>
+            <p>Position: {{ this.user.position }}</p>
+            <p>Dominant Hand: {{ this.user.dominant_hand }}</p>
           </div><br>
 
           <p class="heading-1 text-center">Contact</p>
           <div class="text-center sub-heading-1">
-            <p>Phone: (34424)-543-456</p>
-            <p>Email: something@gmail.com</p>
+            <p>Phone: {{ this.user.phone_number }}</p>
+            <p>Email: {{ this.user.email }}</p>
           </div><br>
         </el-col>
 
@@ -32,10 +32,10 @@
           </div>
           <p class="heading-1 text-center mt-3">Stats</p>
           <div class="text-center sub-heading-1">
-            <p>Goals: 31</p>
-            <p>Assissts: 8</p>
-            <p>Saves: 3</p>
-            <p>Turnovers: 0</p>
+            <p>Goals: {{ this.user.goals }}</p>
+            <p>Assissts: {{ this.user.assists }}</p>
+            <p>Saves: {{ this.user.saves }}</p>
+            <p>Turnovers: {{ this.user.turnovers }}</p>
           </div><br>
         </el-col>
       </el-row>
@@ -44,7 +44,8 @@
 </template>
 
 <script>
-  import { getList } from '@/api/university'
+  import { getUser } from '@/utils/auth'
+  import { getList } from '@/api/college'
   import ResizeText from 'vue-resize-text'
 
 export default {
@@ -54,7 +55,26 @@ export default {
   data() {
     return {
       list: null,
-      listLoading: true
+      listLoading: true,
+      user: {
+        first_name: '',
+        last_name: '',
+        graduation_year: '',
+        email: '',
+        state: '',
+        school: '',
+        height_in_feet: '',
+        height_in_inches: '',
+        weight: '',
+        position: '',
+        dominant_hand: '',
+        phone_number: '',
+        goals: '',
+        assists: '',
+        saves: '',
+        turnovers: ''
+
+      }
     }
   },
   created() {
@@ -62,22 +82,30 @@ export default {
   },
   methods: {
     addAthletes() {
-      debugger
       this.$router.push({name: 'team_games', params: { game_id: 2, id: 1 }})
     },
 
     editGame() {
-      debugger
       this.$router.push({name: 'edit_game', params: { id: 2 }})
     },
     fetchData() {
-      this.listLoading = true
-      getList(this.listQuery).then(response => {
-        debugger
-        this.list = response
-        this.listLoading = false
-      })
-    }
+      debugger
+      var athlete = getUser()
+      this.user.first_name = athlete.first_name
+      this.user.last_name = athlete.last_name
+      this.user.graduation_year = athlete.graduation_year
+      this.user.email = athlete.email
+      this.user.state = athlete.state
+      this.user.school = athlete.school
+      this.user.height_in_feet = athlete.height_in_feet
+      this.user.height_in_inches = athlete.height_in_inches
+      this.user.weight = athlete.weight
+      this.user.position = athlete.position
+      this.user.goals = athlete.goals
+      this.user.assists = athlete.assists
+      this.user.saves = athlete.saves
+      this.user.turnovers = athlete.turnovers
+        }
   }
 }
 

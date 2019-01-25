@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import { getList } from '@/api/university'
+  import { getList } from '@/api/college'
   import ResizeText from 'vue-resize-text'
 
 export default {
