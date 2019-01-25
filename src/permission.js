@@ -8,6 +8,7 @@ import { getToken } from '@/utils/auth' // Authenticity
 const whiteList = ['/login', '/register'] // Do not redirect whitelist
 router.beforeEach((to, from, next) => {
   NProgress.start()
+  debugger
   if (getToken()) {
     if (to.path === '/login') {
       next({ path: '/' })
@@ -19,7 +20,7 @@ router.beforeEach((to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
     } else {
-      next(`/login?redirect=${to.path}`) // Otherwise all redirect to the login page
+      next(`/login?redirect=${"%2Fdashboard"}`) // Otherwise all redirect to the login page
 
       NProgress.done()
     }

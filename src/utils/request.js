@@ -10,7 +10,7 @@ axios.defaults.headers = {
 }
 
 const service = axios.create({
-  baseURL: "http://167.99.60.7", // api 的 base_url
+  baseURL: "http://localhost:3000", // api 的 base_url
   timeout: 5000 // 请求超时时间
 })
 

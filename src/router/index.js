@@ -217,13 +217,13 @@ export var constantRouterMap = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-//  if (isAthlete()) {
-//   constantRouterMap = constantRouterMap.concat(athleteRouteMap)
-// } // Uncomment this to see athlete side page
+ if (isAthlete()) {
+  constantRouterMap = constantRouterMap.concat(athleteRouteMap)
+} // Uncomment this to see athlete side page
 
- if (isCoach()) {
-  constantRouterMap = constantRouterMap.concat(coachRouteMap)
-}
+//  if (isCoach()) {
+//   constantRouterMap = constantRouterMap.concat(coachRouteMap)
+// }
 
 export default new Router({
   // mode: 'history', //后端支持可开

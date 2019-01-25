@@ -1,5 +1,5 @@
 import { login, register, logout, getInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, setUser } from '@/utils/auth'
 
 
 const user = {
@@ -21,6 +21,7 @@ const user = {
         login(username, userInfo.password).then(response => {
           debugger
           const data = response
+          setUser(data)
           setToken(data.auth_token)
           commit('SET_TOKEN', data.auth_token)
           resolve()
