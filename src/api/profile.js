@@ -1,10 +1,35 @@
 import request from '@/utils/request'
+import { getToken } from '@/utils/auth'
 
-export function getList(params) {
+export function getUser() {
   return request({
-    url: 'api/v1/profiles',
-    headers: { "AUTH-TOKEN": "eyJhbGciOiJIUzI1NiJ9.eyJkZW50aXN0X2lkIjozLCJleHAiOiIxNTQ2NDEyNjE4In0.blG6HtUtnWDU3_z8xR_7LKlU_c38kl7lz8Un5RVJGYE"},
+    url: 'api/v1/athletes/profiles',
+    headers: { "AUTH-TOKEN": getToken() },
     method: 'get',
-    params
+  })
+}
+
+export function editUser(user) {
+  debugger
+  return request({
+    url: 'api/v1/athletes/profiles',
+    headers: { "AUTH-TOKEN": getToken() },
+    method: 'put',
+    data: JSON.stringify({"athlete": { firstname: user.firstname, 
+      lastname: user.lastname, 
+      phone_number: user.phone_number, 
+      email: user.email, 
+      school: user.school,
+      state: user.state,
+      city: user.city,
+      gender: user.gender,
+      dominant_hand: user.dominant_hand,
+      height_in_feet: user.height_in_feet,
+      height_in_inches: user.height_in_inches,
+      weight: user.weight,
+      graduation_year: user.graduation_year,
+      phone_number: user.phone_number,
+      link: user.link
+        }})
   })
 }

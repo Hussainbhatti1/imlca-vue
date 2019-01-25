@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(email, password) {
   return request({
-    url: 'api/v1/sessions',
+    url: 'api/v1/athletes/sessions',
     method: 'post',
     data: JSON.stringify({email: email, password: password})
   })
