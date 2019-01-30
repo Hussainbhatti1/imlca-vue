@@ -1,4 +1,4 @@
-import { login, register, logout, getInfo } from '@/api/login'
+import { login, register, getInfo } from '@/api/coach/login'
 import { getToken, setToken, removeToken, setUser } from '@/utils/auth'
 
 

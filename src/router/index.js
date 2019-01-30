@@ -43,7 +43,7 @@ export var coachRouteMap = [
     children: [
       {
         path: 'games',
-        name: 'games',
+        name: 'show_game',
         component: () => import('@/views/games/show'),
         meta: { private: false }
       }
@@ -70,7 +70,7 @@ export var coachRouteMap = [
     children: [
       {
         path: 'team_games',
-        name: 'team_games',
+        name: 'edit_team_game',
         component: () => import('@/views/team_games/edit'),
         meta: { private: false }
       }
@@ -89,6 +89,33 @@ export var coachRouteMap = [
       }
     ]
   },
+
+  {
+    path: '/points/:id/show',
+    component: Layout,
+    children: [
+      {
+        path: 'points',
+        name: 'show_team',
+        component: () => import('@/views/points/show'),
+        meta: { private: false }
+      }
+    ]
+  },
+
+  {
+    path: '/points/:id/edit',
+    component: Layout,
+    children: [
+      {
+        path: 'points',
+        name: 'edit_team',
+        component: () => import('@/views/points/edit'),
+        meta: { private: false }
+      }
+    ]
+  },
+
 
   {
     path: '/schedules',
@@ -217,13 +244,13 @@ export var constantRouterMap = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
- if (isAthlete()) {
-  constantRouterMap = constantRouterMap.concat(athleteRouteMap)
-} // Uncomment this to see athlete side page
+//  if (isAthlete()) {
+//   constantRouterMap = constantRouterMap.concat(athleteRouteMap)
+// } // Uncomment this to see athlete side page
 
-//  if (isCoach()) {
-//   constantRouterMap = constantRouterMap.concat(coachRouteMap)
-// }
+ if (isCoach()) {
+  constantRouterMap = constantRouterMap.concat(coachRouteMap)
+}
 
 export default new Router({
   // mode: 'history', //后端支持可开
