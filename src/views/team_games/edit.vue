@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <h1 align="center" class="sub-heading-2">Team Name</h1>
+    <h1 align="center" class="sub-heading-2">{{ this.form.team_title }}</h1>
     <div class="mx-auto" v-for="n in 10">
       <el-row>
         <el-col :span="24">
@@ -50,7 +50,7 @@
       </el-row>
     </div>
     <el-col :span="24" class="text-center mb-3">
-      <div class="mx-auto" @click="addAthletes" style="cursor: pointer;">
+      <div class="mx-auto" @click="onSubmit" style="cursor: pointer;">
         <el-button type="primary" round>Edit</el-button>
       </div>
     </el-col>
@@ -58,17 +58,21 @@
 </template>
 
 <script>
+  import { editTeamGame } from '@/api/coach/team_game'
+
   export default {
     data() {
     return {
       form: {
-        turnovers: '',
-        goals: '',
-        assists: '',
-        saves: '',
-        athlete: '',
+        game: [],
+        team_game: [],
+        team_title: '',
+        athletes: []
       }
     }
+    },
+    created() {
+      this.fetchData()
     },
     methods: {
       onSubmit() {
@@ -78,6 +82,18 @@
         this.$message({
           message: 'cancel!',
           type: 'warning'
+        })
+      },
+      fetchData() {
+        this.listLoading = true
+        editTeamGame(this.$route.params.id, this.$route.params.game_id).then(response => {
+          debugger
+          this.form.game = response.game
+          this.form.team_game = response.team_game
+          this.form.divisions = response.divisions
+          this.form.team_title = response.team_title
+          this.form.athletes = response.athletes
+          this.listLoading = false
         })
       }
     }

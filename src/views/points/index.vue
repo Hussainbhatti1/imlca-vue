@@ -8,6 +8,7 @@
           element-loading-text="Loading"
           fit
           border
+          @row-click="rowClicked"
           header-row-class-name="sub-heading-2"
           highlight-current-row>
           <el-table-column label="Team">
@@ -17,17 +18,17 @@
           </el-table-column>
           <el-table-column label="W" width="110" align="center">
             <template slot-scope="scope">
-              <span>{{ scope.row.updated_at }}</span>
+              <span>{{ scope.row.won_games_count }}</span>
             </template>
           </el-table-column>
           <el-table-column label="L" width="110" align="center">
             <template slot-scope="scope">
-              <span>{{ scope.row.created_at }}</span>
+              <span>{{ scope.row.lose_games_count }}</span>
             </template>
           </el-table-column>
           <el-table-column label="Pts" width="110" align="center">
             <template slot-scope="scope">
-              <span>{{ scope.row.created_at }}</span>
+              <span>{{ scope.row.points }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -37,7 +38,7 @@
 </template>
 
 <script>
-  import { getList } from '@/api/college'
+  import { getTeams } from '@/api/coach/team'
 
 export default {
   data() {
@@ -50,9 +51,13 @@ export default {
     this.fetchData()
   },
   methods: {
+    rowClicked(row) {
+      debugger
+      this.$router.push({name: 'show_team', params: { id: row.id }})
+    },
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      getTeams().then(response => {
         debugger
         this.list = response
         this.listLoading = false

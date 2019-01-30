@@ -32,18 +32,20 @@
           <div> 
             <el-form-item label="Gender">
               <el-select v-model="form.gender" class="w-100" placeholder="select gender">
-                <el-option label="M" value="male"/>
-                <el-option label="F" value="female"/>
+                <el-option label="Male" value="male"/>
+                <el-option label="Female" value="female"/>
               </el-select>
-            </el-form-item> 
+            </el-form-item>
           </div> 
 
           <div>  
             <el-form-item label="School"> 
-              <el-select v-model="form.school" class="w-100" placeholder="select school">
-                <el-option label="Darain" value="darain"/>
-                <el-option label="Yorktown" value="yorktown"/>
-                <el-option label="Westhill" value="westhill"/>
+               <el-select v-model="form.school_id" class="w-100" placeholder="select school">
+                  <el-option
+                    v-for="school in form.schools"
+                    :label="school[0]"
+                   :value="school[1]">
+                  </el-option>
               </el-select>
             </el-form-item>
           </div>  
@@ -67,7 +69,7 @@
           </div>
           <div class="text-center"> 
             <el-form-item>
-              <el-button type="primary" @click="onSubmit" round>Create</el-button>
+              <el-button type="primary" @click="onSubmit" round>Update</el-button>
               <el-button type="danger" @click="onCancel" round>Cancel</el-button>
             </el-form-item>
           </div>  
@@ -77,6 +79,8 @@
   </div>
 </template>
 <script>
+  import { editUser, getUser } from '@/api/coach/profile'
+
   export default {
     data() {
     return {
@@ -90,13 +94,32 @@
         password_confirm: false,
         password_current: '',
         gender: '',
+        schools:'',
         school:'',
+        school_id:'',
       }
     }
     },
+    created() {
+      this.fetchData()
+    },
     methods: {
       onSubmit() {
+        editUser(this.form)
         this.$message('submit!')
+      },
+      fetchData() {
+        debugger
+        getUser().then(response => {
+          debugger
+          this.form.first_name = response.first_name
+          this.form.last_name = response.last_name
+          this.form.gender = response.gender
+          this.form.email = response.email
+          this.form.schools = response.schools
+          this.form.school = response.school
+          this.form.school_id = response.school_id
+        })
       },
      handleRemove(file, fileList) {
             console.log(file, fileList);

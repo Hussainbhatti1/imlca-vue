@@ -92,7 +92,7 @@
           </div>
           <div>
             <el-form-item label="School"> 
-               <el-select v-model="form.school" class="w-100" placeholder="select school">
+               <el-select v-model="form.school_id" class="w-100" placeholder="select school">
                   <el-option
                     v-for="school in form.schools"
                     :label="school[0]"
@@ -103,7 +103,7 @@
           </div>
           <div>
             <el-form-item label="State">
-              <el-select v-model="form.state" class="w-100" placeholder="select state">
+              <el-select v-model="form.state_id" class="w-100" placeholder="select state">
                 <el-option
                   v-for="state in form.states"
                   :label="state[0]"
@@ -146,7 +146,7 @@
   </div>
 </template>
 <script>
-  import { editUser, getUser } from '@/api/profile'
+  import { editUser, getUser } from '@/api/athlete/profile'
 
   export default {
     data() {
@@ -162,8 +162,10 @@
         gender: '',
         schools:'',
         school:'',
+        school_id:'',
         state:'',
-        states:''
+        states:'',
+        state_id:'',
         position: '',
         city: '',
         dominant_hand: '',
@@ -211,8 +213,10 @@
           this.form.state = response.state
           this.form.schools = response.schools
           this.form.school = response.school
+          this.form.school_id = response.school_id
           this.form.states = response.states
           this.form.state = response.state
+          this.form.state_id = response.state_id
           this.form.height_in_feet = response.height_in_feet
           this.form.height_in_inches = response.height_in_inches
           this.form.weight = response.weight

@@ -1,21 +1,21 @@
 <template>
   <div class="app-container">
-    <div class="mx-auto" v-for="n in 5" @click="onSlotSelection(2)" style="cursor: pointer;">
+    <div class="mx-auto" v-for="game in games" @click="onSlotSelection(game.id)" style="cursor: pointer;">
       <el-row type="flex" class="bottom-boarder-index">
         <el-col :span="10" class="my-auto text-center">
-          <p class="heading-1" v-resize-text="{minFontSize: '30px'}">YorkTown</p>
-          <p class="heading-1">11</p>
+          <p class="heading-1" v-resize-text="{minFontSize: '30px'}">{{ game.first_team_title }}</p>
+          <p class="heading-1">{{ game.first_team_goals }}</p>
         </el-col>
 
         <el-col :span="4" class="my-auto sub-heading-1 text-center">
-          <span class="sub-heading-1">3/3/2019</span><br>
+          <span class="sub-heading-1">{{ game.game_time }}</span><br>
           <span class="mt-3">VS</span><br>
-          <span class="sub-heading-1">NY</span>
+          <span class="sub-heading-1">{{ game.state_title }}</span>
         </el-col>
 
         <el-col :span="10" class="my-auto text-center">
-          <p class="heading-1" v-resize-text="{minFontSize: '30px'}">Versity</p>
-          <p class="heading-1">4</p>
+          <p class="heading-1" v-resize-text="{minFontSize: '30px'}">{{ game.second_team_title }}</p>
+          <p class="heading-1">{{ game.second_team_goals }}</p>
         </el-col>
       </el-row> 
     </div>  
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import { getList } from '@/api/college'
+  import { getGames } from '@/api/coach/game'
   import ResizeText from 'vue-resize-text'
 
 export default {
@@ -32,8 +32,8 @@ export default {
  },
   data() {
     return {
-      list: null,
-      listLoading: true
+      games: null,
+      listLoading: true,
     }
   },
   created() {
@@ -42,14 +42,14 @@ export default {
   methods: {
     onSlotSelection(id) {
       debugger
-      this.$router.push({name: 'games', params: { id: id }})
+      this.$router.push({name: 'show_game', params: { id: id }})
     },
 
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      getGames().then(response => {
         debugger
-        this.list = response
+        this.games = response
         this.listLoading = false
       })
     }

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import { getList, collegeFollow, collegeUnfollow } from '@/api/college'
+  import { getList, collegeFollow, collegeUnfollow } from '@/api/athlete/college'
 
 export default {
   filters: {

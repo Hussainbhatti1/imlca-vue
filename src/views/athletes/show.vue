@@ -45,7 +45,7 @@
 
 <script>
   import { getUser } from '@/utils/auth'
-  import { getList } from '@/api/college'
+  import { getList } from '@/api/athlete/college'
   import ResizeText from 'vue-resize-text'
 
 export default {

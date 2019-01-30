@@ -55,7 +55,7 @@
 
 <script>
 import { isvalidemail } from '@/utils/validate'
-import { getList } from '@/api/login'
+import { getList } from '@/api/athlete/login'
 
 export default {
   name: 'Register',
