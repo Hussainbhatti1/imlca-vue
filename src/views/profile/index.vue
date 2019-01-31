@@ -50,7 +50,7 @@
             </el-form-item>
           </div>  
           <div> 
-            <el-form-item label="Password">
+            <el-form-item label="Current Password">
               <el-input type="password" v-model="form.password_current"></el-input>
             </el-form-item>
           </div>
