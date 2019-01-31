@@ -54,7 +54,7 @@
 
           <div>
             <el-form-item label="School Team">
-              <el-select v-model="form.school_team.id" class="w-100" placeholder="select team">
+              <el-select v-model="form.school_team.team_id" class="w-100" placeholder="select team">
                 <el-option
                   v-for="school_team in form.school_teams"
                   :label="school_team[0]"
@@ -72,13 +72,13 @@
 
           <div>
             <el-form-item label="Goal">
-              <el-input type="number" v-model="form.school_goals"></el-input>
+              <el-input type="number" v-model="form.school_team.goal"></el-input>
             </el-form-item>
           </div>
 
           <div>
             <el-form-item label="Oppoent Team"> 
-              <el-select v-model="form.opponent_team.id" class="w-100" placeholder="select team">
+              <el-select v-model="form.opponent_team.team_id" class="w-100" placeholder="select team">
                 <el-option
                   v-for="opponent_team in form.opponent_teams"
                   :label="opponent_team[0]"
@@ -90,7 +90,7 @@
 
           <div>
             <el-form-item label="Goal">
-              <el-input type="number" v-model="form.opponent_goals"></el-input>
+              <el-input type="number" v-model="form.opponent_team.goal"></el-input>
             </el-form-item>
           </div>
         </el-form>
@@ -152,16 +152,12 @@
         opponent_goals: '',
         school_teams: [],
         school_team: [],
-        school_goals: '',
         opponent_teams: [],
         opponent_team: [],
-        opponent_goals: '',
-        game_time: '',
+        game_time: new Date(),
         result:'',
         winner_id: '',
         game_teams: []
-
-
       }
     }
     },
@@ -193,9 +189,7 @@
           this.form.conferences = response.conferences
           this.form.conference_id = response.conference_id
           this.form.school_team = response.first_team
-          this.form.school_goals = response.first_team_goals
           this.form.opponent_team = response.second_team
-          this.form.opponent_goals = response.second_team_goals
           this.form.school_teams = response.school_teams
           this.form.opponent_teams = response.opponent_teams
           this.form.winner_id = response.winner_id

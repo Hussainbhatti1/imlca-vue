@@ -37,6 +37,7 @@ export function updateGame(id, game) {
       tournament_id: game.tournament_id,
       winner_id: game.winner_id,
       result: game.result,
+      game_time: game.game_time, 
       first_team_attributes: game.school_team,
       second_team_attributes: game.opponent_team
         }})
