@@ -1,151 +1,88 @@
 <template>
   <div class="app-container">
-    <el-table
-      :data="tableData"
-      border
-      header-row-class-name="sub-heading-2"
-      style="width: 100%">
-      <el-table-column
-        prop="name"
-        label="Name"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="position"
-        label="Position"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="goals"
-        label="Goals"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="assists"
-        label="Assists"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="turnovers"
-        label="Turnovers"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="saves"
-        label="Saves"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="actions"
-        label="Actions"
-        width="180">
-      </el-table-column>
-    </el-table>
+        <el-table
+          v-loading="listLoading"
+          :data="list"
+          element-loading-text="Loading"
+          fit
+          border
+          @row-click="rowClicked"
+          header-row-class-name="sub-heading-2"
+          highlight-current-row>
+          <el-table-column label="Name">
+            <template slot-scope="scope">
+              <span>{{ scope.row.full_name }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="Position"  align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.position }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="Goals"  align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.total_goals }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="Assists"  align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.total_assists }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="Turnovers"  align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.total_turnovers }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="Saves"  align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.total_saves }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="Action" align="center">
+            <template slot-scope="scope">
+              <el-button type="primary" size="small" icon="el-icon-edit" @click="onRowClick(scope.row)">Remove</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
   </div>
 </template>
 
 <script>
-  import { getList } from '@/api/athlete/college'
+  import { getAthletes, removeAthlete } from '@/api/coach/athlete'
 
 export default {
-    data() {
-      return {
-        tableData: [{
-          name: 'Trevor Baptiste',
-          position: 'attack',
-          goals: '0',
-          assists:'0',
-          turnovers:'0',
-          saves:'0',
-          actions:'Remove'
-
-        },{
-          name: 'Trevor Baptiste',
-          position: 'attack',
-          goals: '0',
-          assists:'0',
-          turnovers:'0',
-          saves:'0',
-          actions:'Remove'
-
-        }, {
-          name: 'Trevor Baptiste',
-          position: 'attack',
-          goals: '0',
-          assists:'0',
-          turnovers:'0',
-          saves:'0',
-          actions:'Remove'
-
-        }, {
-          name: 'Trevor Baptiste',
-          position: 'attack',
-          goals: '0',
-          assists:'0',
-          turnovers:'0',
-          saves:'0',
-          actions:'Remove'
-
-        }, {
-          name: 'Trevor Baptiste',
-          position: 'attack',
-          goals: '0',
-          assists:'0',
-          turnovers:'0',
-          saves:'0',
-          actions:'Remove'
-
-        }, {
-          name: 'Trevor Baptiste',
-          position: 'attack',
-          goals: '0',
-          assists:'0',
-          turnovers:'0',
-          saves:'0',
-          actions:'Remove'
-
-        }, {
-          name: 'Trevor Baptiste',
-          position: 'attack',
-          goals: '0',
-          assists:'0',
-          turnovers:'0',
-          saves:'0',
-          actions:'Remove'
-
-        }, {
-          name: 'Trevor Baptiste',
-          position: 'attack',
-          goals: '0',
-          assists:'0',
-          turnovers:'0',
-          saves:'0',
-          actions:'Remove'
-
-        }, {
-          name: 'Trevor Baptiste',
-          position: 'attack',
-          goals: '0',
-          assists:'0',
-          turnovers:'0',
-          saves:'0',
-          actions:'Remove'
-
-        }]
-      }
-    },
+  data() {
+    return {
+      list: null,
+      listLoading: true
+    }
+  },
   created() {
     this.fetchData()
   },
   methods: {
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      getAthletes().then(response => {
         debugger
         this.list = response
         this.listLoading = false
       })
-    }
+    },
+
+    onRowClick(row) {
+      if (row.id != null){
+        removeAthlete(row.id).then(response => {
+            row.id = null
+            this.listLoading = false
+          })
+        this.$message({
+          message: 'Athlete has been removed',
+          type: 'success'
+        })
+      }
+    },
   }
 }
 </script>
