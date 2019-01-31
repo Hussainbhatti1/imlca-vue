@@ -13,18 +13,20 @@
           <div>
             <el-form-item label="Gender">
               <el-select v-model="form.gender" class="w-100" placeholder="select gender">
-                <el-option label="M" value="Male"/>
-                <el-option label="F" value="Female"/>
+                <el-option label="Male" value="male"/>
+                <el-option label="Female" value="female"/>
               </el-select>
             </el-form-item>
           </div>
 
-          <el-form-item label="Athlete" v-for="(input, index) in inputs">
+          <el-form-item label="Athlete" v-for="(team_athlete, index) in form.team_athletes">
             <el-button type="primary" @click="deleteRow(index)" size="mini">Delete</el-button>
-            <el-select v-model="input.one" class="w-100" placeholder="select athlete">
-              <el-option label="Athlete 1" value="athlete 1"/>
-              <el-option label="Athlete 2" value="athlete 2"/>
-              <el-option label="Athlete 3" value="athlete 3"/>
+            <el-select v-model="team_athlete.athlete_id" class="w-100" placeholder="select athlete">
+              <el-option
+                v-for="athlete in form.athletes"
+                :label="athlete[0]"
+               :value="athlete[1]">
+              </el-option>
             </el-select>
           </el-form-item>
           <el-button type="primary" @click="addRow" round>Add athlete</el-button>
@@ -40,30 +42,46 @@
   </div>
 </template>
 <script>
+  import { newTeam, createTeam} from '@/api/coach/team'
+
   export default {
     data() {
     return {
       form: {
         gender: '',
         title: '',
+        athletes: [],
+        team_athletes: []
       },
 
        inputs: []
     }
     },
+    created() {
+      this.fetchData()
+    },
     methods: {
 
      addRow() {
-          this.inputs.push({
-            one: '',
-            two: ''
+          debugger
+          this.form.team_athletes.push({
           })
         },
+
+        fetchData() {
+          newTeam().then(response => {
+            debugger
+            this.form.athletes = response.athletes
+          })
+        },
+
         deleteRow(index) {
-          this.inputs.splice(index,1)
+          this.form.team_athletes.splice(index,1)
         },
 
       onSubmit() {
+        debugger
+        createTeam(this.form)
         this.$message('submit!')
       },
       onCancel() {

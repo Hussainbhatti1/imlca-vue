@@ -19,9 +19,9 @@
             </el-form-item>
           </div>
 
-          <el-form-item label="Athlete" v-for="(athlete, index) in form.team_athletes">
+          <el-form-item label="Athlete" v-for="(team_athlete, index) in form.team_athletes">
             <el-button type="primary" @click="deleteRow(index)" size="mini">Delete</el-button>
-            <el-select v-model="athlete.id" class="w-100" placeholder="select athlete">
+            <el-select v-model="team_athlete.athlete_id" class="w-100" placeholder="select athlete">
               <el-option
                 v-for="athlete in form.athletes"
                 :label="athlete[0]"
@@ -74,7 +74,7 @@
             this.form.title = response.title
             this.form.gender = response.gender
             this.form.athletes = response.athletes
-            this.form.team_athletes = response.team_athletes
+            this.form.team_athletes = response.athlete_teams
           })
         },
 
