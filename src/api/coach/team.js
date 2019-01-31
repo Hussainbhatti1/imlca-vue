@@ -23,7 +23,7 @@ export function editTeam(id, team) {
     url: `api/v1/coaches/teams/${id}`,
     headers: { "AUTH-TOKEN": getToken() },
     method: 'put',
-    data: JSON.stringify({"athlete": { title: team.title,
+    data: JSON.stringify({"team": { title: team.title,
       gender: team.gender,
       athlete_teams_attributes: team.team_athletes
         }})
