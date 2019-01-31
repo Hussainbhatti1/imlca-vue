@@ -9,6 +9,14 @@ export function getGames() {
   })
 }
 
+export function newGames() {
+  return request({
+    url: 'api/v1/coaches/games/new',
+    headers: { "AUTH-TOKEN": getToken() },
+    method: 'get',
+  })
+}
+
 export function gameDetails(id) {
   return request({
     url: `api/v1/coaches/games/${id}`,
@@ -38,6 +46,25 @@ export function updateGame(id, game) {
       winner_id: game.winner_id,
       result: game.result,
       game_time: game.game_time, 
+      first_team_attributes: game.school_team,
+      second_team_attributes: game.opponent_team
+        }})
+  })
+}
+
+export function createGame(game) {
+  debugger
+  return request({
+    url: `api/v1/coaches/games`,
+    headers: { "AUTH-TOKEN": getToken() },
+    method: 'post',
+    data: JSON.stringify({"game": { state_id: game.state_id,
+      conference_id: game.conference_id,
+      division_id: game.division_id,
+      tournament_id: game.tournament_id,
+      winner_id: game.winner_id,
+      result: game.result,
+      game_time: game.game_time,
       first_team_attributes: game.school_team,
       second_team_attributes: game.opponent_team
         }})

@@ -81,7 +81,7 @@ export default {
     },
 
     editGame() {
-      this.$router.push({name: 'edit_game', params: { id: 2 }})
+      this.$router.push({name: 'edit_game', params: { id: this.$route.params.id }})
     },
     fetchData() {
       this.listLoading = true

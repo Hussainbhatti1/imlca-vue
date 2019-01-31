@@ -6,69 +6,91 @@
         <el-form ref="form" :model="form" label-width="150px">
           <div> 
             <el-form-item label="State">
-              <el-select v-model="form.state" class="w-100" placeholder="select state">
-                <el-option label="NY" value="New York"/>
-                <el-option label="CA" value="Los angeles"/>
+              <el-select v-model="form.state_id" class="w-100" placeholder="select state">
+                  <el-option
+                    v-for="state in form.states"
+                    :label="state[0]"
+                   :value="state[1]">
+                  </el-option>
               </el-select>
             </el-form-item> 
           </div>
 
           <div> 
             <el-form-item label="Division">
-              <el-select v-model="form.division" class="w-100" placeholder="select division">
-                <el-option label="L" value="L"/>
+              <el-select v-model="form.division_id" class="w-100" placeholder="select division">
+                  <el-option
+                    v-for="division in form.divisions"
+                    :label="division[0]"
+                   :value="division[1]">
+                  </el-option>
               </el-select>
             </el-form-item> 
           </div>
 
           <div> 
             <el-form-item label="Tournament">
-              <el-select v-model="form.tournament" class="w-100" placeholder="select tournament">
-                <el-option label="t1" value="T-1"/>
+              <el-select v-model="form.tournament_id" class="w-100" placeholder="select tournament">
+                  <el-option
+                    v-for="tournament in form.tournaments"
+                    :label="tournament[0]"
+                   :value="tournament[1]">
+                  </el-option>
               </el-select>
             </el-form-item> 
           </div>
 
           <div> 
             <el-form-item label="Conference">
-              <el-select v-model="form.conference" class="w-100" placeholder="select conference">
-                <el-option label="c1" value="C-1"/>
+              <el-select v-model="form.conference_id" class="w-100" placeholder="select conference">
+                  <el-option
+                    v-for="conference in form.conferences"
+                    :label="conference[0]"
+                   :value="conference[1]">
+                  </el-option>
               </el-select>
             </el-form-item> 
           </div>
 
           <div> 
             <el-form-item label="School Team">
-              <el-select v-model="form.school_team" class="w-100" placeholder="select team">
-                <el-option label="Darian" value="Darian"/>
+              <el-select v-model="form.school_team.team_id" class="w-100" placeholder="select team">
+                <el-option
+                  v-for="school_team in form.school_teams"
+                  :label="school_team[0]"
+                 :value="school_team[1]">
+                </el-option>
               </el-select>
             </el-form-item> 
           </div>
 
           <div> 
             <el-form-item label="Game Time">
-              <el-date-picker type="date" style="width: 100%" placeholder="Pick a date" v-model="form.date1"></el-date-picker>
+              <el-date-picker type="date" style="width: 100%" placeholder="Pick a date" v-model="form.game_time"></el-date-picker>
             </el-form-item>
           </div> 
 
           <div>  
             <el-form-item label="Goal">
-              <el-input type="number" v-model="form.school_goals"></el-input>
+              <el-input type="number" v-model="form.school_team.goal"></el-input>
             </el-form-item>
           </div>
 
           <div>  
             <el-form-item label="Oppoent Team"> 
-              <el-select v-model="form.opponent_team" class="w-100" placeholder="select team">
-                <el-option label="Yorktown" value="yorktown"/>
-                <el-option label="Westhill" value="westhill"/>
+              <el-select v-model="form.opponent_team.team_id" class="w-100" placeholder="select team">
+                <el-option
+                  v-for="opponent_team in form.opponent_teams"
+                  :label="opponent_team[0]"
+                 :value="opponent_team[1]">
+                </el-option>
               </el-select>
             </el-form-item>
           </div>
 
           <div>  
             <el-form-item label="Goal">
-              <el-input type="number" v-model="form.opponent_goals"></el-input>
+              <el-input type="number" v-model="form.opponent_team.goal"></el-input>
             </el-form-item>
           </div>
 
@@ -83,31 +105,61 @@
   </div>
 </template>
 <script>
+  import { newGames, createGame } from '@/api/coach/game'
+
   export default {
     data() {
     return {
       form: {
-        state: '',
-        division: '',
-        tournament: '',
-        conference: '',
-        school_goals: '',
+        states: [],
+        state_id: '',
+        divisions: [],
+        division_id: '',
+        tournaments: [],
+        tournament_id: '',
+        conferences: [],
+        conference_id: '',
         opponent_goals: '',
-        school_team:'',
-        opponent_team:'',
-        date1: '',
-        result:'',
+        school_teams: [],
+        school_team: [],
+        opponent_teams: [],
+        opponent_team: [],
+        game_time: new Date(),
       }
     }
     },
+    created() {
+      this.fetchData()
+    },
     methods: {
       onSubmit() {
+        createGame(this.form)
         this.$message('submit!')
       },
       onCancel() {
         this.$message({
           message: 'cancel!',
           type: 'warning'
+        })
+      },
+      fetchData() {
+        this.listLoading = true
+        newGames().then(response => {
+          debugger
+          this.form.states = response.states
+          this.form.state_id = response.state_id
+          this.form.divisions = response.divisions
+          this.form.division_id = response.division_id
+          this.form.game_time = response.game_time
+          this.form.tournaments = response.tournaments
+          this.form.tournament_id = response.tournament_id
+          this.form.conferences = response.conferences
+          this.form.conference_id = response.conference_id
+          this.form.school_team = response.first_team
+          this.form.opponent_team = response.second_team
+          this.form.school_teams = response.school_teams
+          this.form.opponent_teams = response.opponent_teams
+          this.listLoading = false
         })
       }
     }
