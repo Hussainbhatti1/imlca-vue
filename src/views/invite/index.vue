@@ -25,12 +25,15 @@
             </el-form-item>
           </div>
           <div> 
-            <el-form-item label="State">
-              <el-select v-model="form.state" class="w-100" placeholder="select state">
-                <el-option label="NY" value="New York"/>
-                <el-option label="CA" value="Los Angeles"/>
+            <el-form-item label="State"> 
+               <el-select v-model="form.state_id" class="w-100" placeholder="select state">
+                  <el-option
+                    v-for="state in form.states"
+                    :label="state[0]"
+                   :value="state[1]">
+                  </el-option>
               </el-select>
-            </el-form-item> 
+            </el-form-item>
           </div>
           <div class="text-center">  
             <el-form-item>
@@ -43,6 +46,8 @@
   </div>
 </template>
 <script>
+  import { newInvitation, createInvitation } from '@/api/coach/invite'
+
   export default {
     data() {
     return {
@@ -51,14 +56,26 @@
         last_name: '',
         email: '',
         jersey_no: '',
-        state: '',
+        states: [],
+        school_id: ''
       }
     }
     },
+    created() {
+      this.fetchData()
+    },
     methods: {
       onSubmit() {
+        createInvitation(this.form)
         this.$message('submit!')
-      }
+      },
+      fetchData() {
+        debugger
+        newInvitation().then(response => {
+          this.form.states = response.states
+          this.form.school_id = response.school_id
+        })
+      },
     }
   }
 </script>
